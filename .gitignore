@@ -1,0 +1,44 @@
+# Ignore system files and temporary files
+*.log
+*.aux
+*.dvi
+*.ini
+*.bak
+*.swp
+*.tmp
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignore Windows directories
+AppData/
+Contacts/
+Desktop.ini
+Downloads/
+OneDrive/
+Pictures/
+Saved Games/
+Searches/
+Tracing/
+Videos/
+VirtualBox VMs/
+
+# Ignore NTUSER.DAT and similar files
+NTUSER.DAT*
+
+# Ignore IDEs and tools
+.gradle/
+.m2/
+.ssh/
+.vscode/
+.idea/
+eclipse-workspace/
+
+# Ignore other irrelevant directories
+3D Objects/
+Cisco Packet Tracer*/
+DevOps/
+scoop/
+
