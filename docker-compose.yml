@@ -14,10 +14,10 @@ services:
   db:
     image: mariadb:10.6
     environment:
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: notes
       MYSQL_USER: root
-      MYSQL_PASSWORD: 
+      MYSQL_PASSWORD: password
     volumes:
       - mariadb_data:/var/lib/mysql
 
