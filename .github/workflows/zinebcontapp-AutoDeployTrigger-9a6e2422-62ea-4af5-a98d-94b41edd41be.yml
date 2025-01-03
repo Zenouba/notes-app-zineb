@@ -1,0 +1,48 @@
+name: Trigger auto deployment for zinebcontapp
+
+# When this action will be executed
+on:
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ master ]
+    paths:
+    - '**'
+    - '.github/workflows/zinebcontapp-AutoDeployTrigger-9a6e2422-62ea-4af5-a98d-94b41edd41be.yml'
+
+  # Allow manual trigger 
+  workflow_dispatch:      
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions: 
+      id-token: write #This is required for requesting the OIDC JWT Token
+      contents: read #Required when GH token is used to authenticate with private repo
+
+    steps:
+      - name: Checkout to the branch
+        uses: actions/checkout@v2
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.ZINEBCONTAPP_AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.ZINEBCONTAPP_AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.ZINEBCONTAPP_AZURE_SUBSCRIPTION_ID }}
+
+      - name: Build and push container image to registry
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          _dockerfilePathKey_: _dockerfilePath_
+          registryUrl: acrzineb.azurecr.io
+          registryUsername: ${{ secrets.ZINEBCONTAPP_REGISTRY_USERNAME }}
+          registryPassword: ${{ secrets.ZINEBCONTAPP_REGISTRY_PASSWORD }}
+          containerAppName: zinebcontapp
+          resourceGroup: grp-zineb-
+          imageToBuild: acrzineb.azurecr.io/zinebcontapp:${{ github.sha }}
+          _buildArgumentsKey_: |
+            _buildArgumentsValues_
+
+
