@@ -7,19 +7,13 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-image: url('https://pin.it/5KRdPsxKV');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 500vh; 
-    margin: 0;      
+    background-color: #f4f4f4;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    
 }
 
 .section {
